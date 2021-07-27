@@ -1,49 +1,32 @@
 import React, { useState } from "react";
-import './Navbar.css';
-import { Layout, Menu } from 'antd';
-import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-} from '@ant-design/icons';
-const { Header, Sider, Content } = Layout;
+import "./Navbar.css";
+import { Layout, Menu } from "antd";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLayerGroup, faFileAlt } from "@fortawesome/free-solid-svg-icons";
+import Top from "../top/Top";
+const { Sider, Content } = Layout;
 
 function Navbar() {
-    const [collapsed, setCollpased] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <Layout style={{height: "100%"}}>
+    <Layout style={{ height: "100%" }}>
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="Logo" />
+        <div className="Logo">
+          <FontAwesomeIcon icon={['fab', 'mendeley']} />
+        </div>
         <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
-          <Menu.Item key="1" icon={<UserOutlined />}>
-            nav 1
+          <Menu.Item key="1" icon={<FontAwesomeIcon icon={faLayerGroup} />}>
+            Channels
           </Menu.Item>
-          <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-            nav 2
-          </Menu.Item>
-          <Menu.Item key="3" icon={<UploadOutlined />}>
-            nav 3
+          <Menu.Item key="2" icon={<FontAwesomeIcon icon={faFileAlt} />}>
+            Posts
           </Menu.Item>
         </Menu>
       </Sider>
       <Layout className="MainContainer">
-        <Header className="Header">
-          {React.createElement(
-            collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
-            {
-              className: "trigger",
-              onClick: () => setCollpased(!collapsed),
-            }
-          )}
-        </Header>
-        <Content
-          className="ContentContainer"
-        >
-          
-        </Content>
+        <Top collapsed={collapsed} toggleCollapse={setCollapsed} />
+        <Content className="ContentContainer"></Content>
       </Layout>
     </Layout>
   );

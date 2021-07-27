@@ -11,23 +11,19 @@
 }
 
 .Logo {
-  height: 7vh !important;
+  display: flex;
+  height: 8vh !important;
   margin: 16px;
-  background: rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 3em;
+  justify-content: center;
+  align-items: center;
 }
 
 .MainContainer {
   background: #fff;
   padding: 0;
   height: 100vh;
-}
-
-.Header {
-  padding: 0 !important;
-  height: 5vh !important;
-  background: #fff !important;
-  margin: 0;
-  line-height: 5vh !important;
 }
 
 .ContentContainer {
