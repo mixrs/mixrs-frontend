@@ -14,6 +14,7 @@ function Navbar() {
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="Logo">
           <FontAwesomeIcon icon={['fab', 'mendeley']} />
+          <p>MiXrS</p>
         </div>
         <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
           <Menu.Item key="1" icon={<FontAwesomeIcon icon={faLayerGroup} />}>

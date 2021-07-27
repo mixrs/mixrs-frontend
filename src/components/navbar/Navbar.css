@@ -15,10 +15,21 @@
   height: 8vh !important;
   margin: 16px;
   color: white;
-  font-size: 3em;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
+.Logo > p {
+  font-size: 1em;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  letter-spacing: 2px;
+}
+
+.Logo > svg {
+  font-size: 3em;
+}
+
 
 .MainContainer {
   background: #fff;
