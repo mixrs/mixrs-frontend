@@ -29,7 +29,7 @@ function Navbar() {
           </Menu.Item>
         </Menu>
       </Sider>
-      <Layout className="HeaderContainer">
+      <Layout className="MainContainer">
         <Header className="Header">
           {React.createElement(
             collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
@@ -42,7 +42,7 @@ function Navbar() {
         <Content
           className="ContentContainer"
         >
-          Content
+          
         </Content>
       </Layout>
     </Layout>
