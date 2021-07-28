@@ -1,0 +1,7 @@
+.ChannelContent {
+    margin-top: 20px;
+}
+
+.ChannelDetails > p:first-child {
+    font-weight: bold;
+}

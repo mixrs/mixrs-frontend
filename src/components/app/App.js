@@ -4,7 +4,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { Switch, Route } from "react-router-dom";
 import Top from "../top/Top";
-import Channels from "../channels/Channel";
+import Channels from "../channels/Channels";
 import Sidebar from "../sidebar/Sidebar";
 import { Layout } from "antd";
 import Dashboard from "../dashboard/Dashboard";
