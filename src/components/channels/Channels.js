@@ -1,7 +1,13 @@
-import { Image, Table } from "antd";
+import { Image, Table, Tag } from "antd";
 import React, { useState, useEffect } from "react";
 import { getAllChannels } from "../services/Channels";
 import "./Channels.css";
+
+function grabColor() {
+  let tagColors = ["red", "green", "blue", "magenta", "orange", "cyan", "geekblue"];
+  let random = Math.floor(Math.random() * tagColors.length);
+  return tagColors[random];
+}
 
 function Channels() {
   const [channelList, setChannelList] = useState([]);
@@ -38,6 +44,36 @@ function Channels() {
         </div>
       ),
     },
+    {
+      title: "Tags",
+      dataIndex: "tags",
+      key: "tags",
+      width: 300,
+      render: (tags) => (
+        <div className="TagDetails">
+          {tags.map((tag) => {
+            return (
+              <Tag color={grabColor()} key={() => Date.now()}>
+                {tag}
+              </Tag>
+            );
+          })}
+        </div>
+      ),
+    },
+    {
+      title: "Actions",
+      dataIndex: "actions",
+      key: "actions",
+      width: 300,
+      render: () => (
+        <div>
+          <a>Edit</a>
+          <a> | </a>
+          <a>Delete</a>
+        </div>
+      )
+    }
   ];
 
   useEffect(() => {
@@ -53,6 +89,7 @@ function Channels() {
               title: i.title,
               description: i.description,
             },
+            tags: ["gaming", "humor", "memes"],
           };
 
           allChannels.push(c);

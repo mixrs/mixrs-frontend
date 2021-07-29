@@ -5,3 +5,9 @@
 .ChannelDetails > p:first-child {
     font-weight: bold;
 }
+
+.TagDetails {
+    word-wrap: break-word;
+    word-break: break-all;
+    line-height: 30px;
+}

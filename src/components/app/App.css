@@ -21,6 +21,7 @@
 
 .ContentContainer:hover {
   overflow-y: scroll;
+  overflow-x: scroll;
 }
 
 .ContentContainer::-webkit-scrollbar {
