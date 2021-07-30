@@ -1,0 +1,9 @@
+.PostedBy {
+    color: grey;
+}
+
+.Post > .Divider {
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ddd;
+}

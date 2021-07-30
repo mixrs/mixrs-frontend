@@ -1,0 +1,25 @@
+.ChannelContent {
+    margin-top: 20px;
+}
+
+.Divider {
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ddd;
+}
+
+.ChannelDetails > p:first-child {
+    font-weight: bold;
+}
+
+.TagDetails {
+    word-wrap: break-word;
+    word-break: break-all;
+    line-height: 30px;
+}
+
+.Title {
+    text-decoration: none;
+    color: black;
+    font-size: medium;
+}
