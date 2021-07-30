@@ -1,15 +1,24 @@
 import { Image, Table, Tag } from "antd";
 import React, { useState, useEffect } from "react";
 import { getAllChannels } from "../services/Channels";
+import { Link, withRouter } from "react-router-dom";
 import "./Channels.css";
 
 function grabColor() {
-  let tagColors = ["red", "green", "blue", "magenta", "orange", "cyan", "geekblue"];
+  let tagColors = [
+    "red",
+    "green",
+    "blue",
+    "magenta",
+    "orange",
+    "cyan",
+    "geekblue",
+  ];
   let random = Math.floor(Math.random() * tagColors.length);
   return tagColors[random];
 }
 
-function Channels() {
+function Channels({location}) {
   const [channelList, setChannelList] = useState([]);
 
   const columns = [
@@ -39,7 +48,7 @@ function Channels() {
       key: "details",
       render: (data) => (
         <div className="ChannelDetails">
-          <p>{data.title}</p>
+          <Link to={`/channels/${data.id}/posts`} className="Title">{data.title}</Link>
           <p>{data.description}</p>
         </div>
       ),
@@ -53,7 +62,7 @@ function Channels() {
         <div className="TagDetails">
           {tags.map((tag) => {
             return (
-              <Tag color={grabColor()} key={() => Date.now()}>
+              <Tag color={grabColor()} key={tag}>
                 {tag}
               </Tag>
             );
@@ -68,12 +77,10 @@ function Channels() {
       width: 300,
       render: () => (
         <div>
-          <a>Edit</a>
-          <a> | </a>
-          <a>Delete</a>
+          <a href="/">Edit</a>|<a href="/">Delete</a>
         </div>
-      )
-    }
+      ),
+    },
   ];
 
   useEffect(() => {
@@ -84,8 +91,8 @@ function Channels() {
         let allChannels = [];
         data.map((i) => {
           let c = {
-            id: i.id,
             details: {
+              id: i.id,
               title: i.title,
               description: i.description,
             },
@@ -93,6 +100,7 @@ function Channels() {
           };
 
           allChannels.push(c);
+          return null;
         });
         setChannelList(allChannels);
       }
@@ -104,15 +112,16 @@ function Channels() {
   return (
     <div className="Channel">
       <h2>All Channels</h2>
+      <hr className="Divider" />
       <div className="ChannelContent">
         <Table
           columns={columns}
           dataSource={channelList}
-          pagination={{ position: ["topRight"] }}
+          pagination={{ position: ["topLeft"] }}
         />
       </div>
     </div>
   );
 }
 
-export default Channels;
+export default withRouter(Channels);

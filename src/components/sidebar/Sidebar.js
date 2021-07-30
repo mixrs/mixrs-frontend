@@ -2,7 +2,7 @@ import React from "react";
 import "./Sidebar.css";
 import { Layout, Menu } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLayerGroup, faFileAlt, faHome } from "@fortawesome/free-solid-svg-icons";
+import { faLayerGroup, faHome } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 const { Sider } = Layout;
@@ -20,9 +20,6 @@ function Sidebar({ collapsed }) {
         </Menu.Item>
         <Menu.Item key="1" icon={<FontAwesomeIcon icon={faLayerGroup} />}>
           <Link to="/channels">Channels</Link>
-        </Menu.Item>
-        <Menu.Item key="2" icon={<FontAwesomeIcon icon={faFileAlt} />}>
-          Posts
         </Menu.Item>
       </Menu>
     </Sider>
