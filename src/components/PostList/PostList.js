@@ -22,7 +22,7 @@ function PostList() {
 
   return (
     <div className="Posts">
-      <h2>Posts</h2>
+      <h2>All Posts</h2>
       <hr className="Divider" />
       {posts.map((post) => {
         return <Post data={post} key={post.id} />;

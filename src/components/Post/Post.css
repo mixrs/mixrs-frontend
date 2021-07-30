@@ -1,5 +1,21 @@
 .PostedBy {
     color: grey;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.PostedBy > .Author {
+    margin-left: 5px;
+}
+
+.Post > .PostTitle {
+    font-weight: 700;
+}
+
+.Post > .PostContent {
+    font-weight: 500;
 }
 
 .Post > .Divider {
