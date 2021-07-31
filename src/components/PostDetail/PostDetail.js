@@ -85,7 +85,7 @@ function PostDetail() {
             avatar={
               <Avatar
                 src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                alt="Han Solo"
+                alt={post.user.name}
               />
             }
             content={
