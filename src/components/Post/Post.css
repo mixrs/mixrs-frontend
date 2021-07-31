@@ -12,6 +12,13 @@
 
 .Post > .PostTitle {
     font-weight: 700;
+    text-decoration: none;
+    font-size: 1.5em;
+    color: black;
+}
+
+.Post > .PostTitle:hover {
+    text-decoration: underline;
 }
 
 .Post > .PostContent {

@@ -1,7 +1,7 @@
 import { Image, Table, Tag } from "antd";
 import React, { useState, useEffect } from "react";
 import { getAllChannels } from "../services/Channels";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Channels.css";
 
 function grabColor() {
@@ -18,7 +18,7 @@ function grabColor() {
   return tagColors[random];
 }
 
-function Channels({location}) {
+function Channels() {
   const [channelList, setChannelList] = useState([]);
 
   const columns = [
@@ -124,4 +124,4 @@ function Channels({location}) {
   );
 }
 
-export default withRouter(Channels);
+export default Channels;
