@@ -4,7 +4,7 @@ import "./PostDetail.css";
 import { Avatar, Image, Comment, Form, Input, Button } from "antd";
 import { useParams } from "react-router-dom";
 import { getPostById } from "../services/Posts";
-import { getComments } from "../services/Comments";
+import { createComment, getComments } from "../services/Comments";
 import CommentList from "../CommentList/CommentList";
 const { TextArea } = Input;
 
@@ -14,14 +14,62 @@ function PostDetail() {
   const [comments, setComments] = useState([]);
   const [currentComment, setCurrentComment] = useState("");
 
+  const fetchComments = (channelId, postId) => {
+    getComments(channelId, postId).then((item) => {
+      let data = item.data;
+      let allComments = [];
+      if (!data) {
+        return null;
+      }
+      data.map((i) => {
+        let newComment = {
+          author: i.user.name,
+          avatar:
+            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+          content: <p>{i.comment}</p>,
+          datetime: moment(i.createdAt).fromNow(),
+        };
+
+        allComments.push(newComment);
+        return null;
+      });
+      setComments(allComments);
+    });
+  };
+
+  const fetchPostDetails = (channelId, postId) => {
+    getPostById(channelId, postId).then((item) => {
+      setPost(item.data);
+    });
+  };
+
+  const saveComment = () => {
+    createComment(channelId, postId, {
+      userId: "a31b2a75-28ad-4660-a937-2b0685566d99",
+      comment: currentComment,
+    })
+      .then((res) => {
+        console.log(res);
+        setComments([
+          {
+            author: post.user.name,
+            avatar:
+              "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+            content: <p>{currentComment}</p>,
+            datetime: moment().fromNow(),
+          },
+          ...comments,
+        ]);
+      })
+      .then(() => setCurrentComment(""));
+  };
+
   useEffect(() => {
     let mounted = true;
 
-    getPostById(channelId, postId).then((item) => {
-      if (mounted) {
-        setPost(item.data);
-      }
-    });
+    if (mounted) {
+      fetchPostDetails(channelId, postId);
+    }
 
     return () => {
       mounted = false;
@@ -31,28 +79,9 @@ function PostDetail() {
   useEffect(() => {
     let mounted = true;
 
-    getComments(channelId, postId).then((item) => {
-      if (mounted) {
-        let data = item.data;
-        let allComments = [];
-        if (!data) {
-          return null;
-        }
-        data.map((i) => {
-          let newComment = {
-            author: i.user.name,
-            avatar:
-              "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-            content: <p>{i.comment}</p>,
-            datetime: moment(i.createdAt).fromNow(),
-          };
-
-          allComments.push(newComment);
-          return null;
-        });
-        setComments(allComments);
-      }
-    });
+    if (mounted) {
+      fetchComments(channelId, postId);
+    }
   }, [channelId, postId]);
 
   const handleChange = (e) => {
@@ -64,18 +93,7 @@ function PostDetail() {
       return;
     }
 
-    setComments([
-      ...comments,
-      {
-        author: post.user.name,
-        avatar:
-          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-        content: <p>{currentComment}</p>,
-        datetime: moment().fromNow(),
-      },
-    ]);
-
-    setCurrentComment("");
+    saveComment();
   };
 
   const Editor = ({ onChange, onSubmit, value }) => (
