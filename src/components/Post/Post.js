@@ -9,7 +9,7 @@ function Post({ data }) {
       <div className="PostedBy">
         <Avatar
           src={
-            <Image src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+            <Image src={`data:image/png;base64, ${data.user.image}`} />
           }
         />
         <span className="Author">{data.user.name} posted</span>

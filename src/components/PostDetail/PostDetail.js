@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { getPostById } from "../services/Posts";
 import { createComment, getComments } from "../services/Comments";
 import CommentList from "../CommentList/CommentList";
+import { getCurrentUser } from "../services/Users";
 const { TextArea } = Input;
 
 function PostDetail() {
@@ -13,6 +14,18 @@ function PostDetail() {
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
   const [currentComment, setCurrentComment] = useState("");
+  const [currentUser, setCurrentUser] = useState(null);
+
+  const fetchCurrentUser = () => {
+    getCurrentUser().then((item) => {
+      let data = item.data;
+      if (!data) {
+        return null;
+      }
+
+      setCurrentUser(data);
+    });
+  };
 
   const fetchComments = (channelId, postId) => {
     getComments(channelId, postId).then((item) => {
@@ -124,7 +137,10 @@ function PostDetail() {
             <Avatar
               className="Avatar"
               src={
-                <Image src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                <Image
+                  src={`data:image/png;base64, ${post.user.image}`}
+                  alt={post.user.name}
+                />
               }
             />
             <hr className="Divider" />
@@ -132,19 +148,21 @@ function PostDetail() {
           <h4>{post.user.name}</h4>
           <div className="PostContent">{post.content}</div>
           {comments.length > 0 && <CommentList comments={comments} />}
-          <Comment
-            avatar={
-              <Avatar
-                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                alt={post.user.name}
-              />
-            }
-            content={Editor({
-              onChange: handleChange,
-              onSubmit: handleSubmit,
-              value: currentComment,
-            })}
-          />
+          {currentUser && (
+            <Comment
+              avatar={
+                <Avatar
+                  src={`data:image/png;base64, ${currentUser.image}`}
+                  alt={currentUser.name}
+                />
+              }
+              content={Editor({
+                onChange: handleChange,
+                onSubmit: handleSubmit,
+                value: currentComment,
+              })}
+            />
+          )}
         </div>
       ) : (
         ""
