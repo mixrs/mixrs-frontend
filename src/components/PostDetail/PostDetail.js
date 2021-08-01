@@ -53,7 +53,7 @@ function PostDetail() {
         setComments(allComments);
       }
     });
-  });
+  }, [channelId, postId]);
 
   const handleChange = (e) => {
     setCurrentComment(e.target.value);
