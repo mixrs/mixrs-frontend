@@ -4,6 +4,7 @@ import "./PostDetail.css";
 import { Avatar, Image, Comment, Form, Input, Button } from "antd";
 import { useParams } from "react-router-dom";
 import { getPostById } from "../services/Posts";
+import { getComments } from "../services/Comments";
 import CommentList from "../CommentList/CommentList";
 const { TextArea } = Input;
 
@@ -26,6 +27,33 @@ function PostDetail() {
       mounted = false;
     };
   }, [channelId, postId]);
+
+  useEffect(() => {
+    let mounted = true;
+
+    getComments(channelId, postId).then((item) => {
+      if (mounted) {
+        let data = item.data;
+        let allComments = [];
+        if (!data) {
+          return null;
+        }
+        data.map((i) => {
+          let newComment = {
+            author: i.user.name,
+            avatar:
+              "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+            content: <p>{i.comment}</p>,
+            datetime: moment(i.createdAt).fromNow(),
+          };
+
+          allComments.push(newComment);
+          return null;
+        });
+        setComments(allComments);
+      }
+    });
+  });
 
   const handleChange = (e) => {
     setCurrentComment(e.target.value);
@@ -56,7 +84,12 @@ function PostDetail() {
         <TextArea rows={2} onChange={onChange} value={value} />
       </Form.Item>
       <Form.Item>
-        <Button htmlType="submit" onClick={onSubmit} type="primary" shape="round">
+        <Button
+          htmlType="submit"
+          onClick={onSubmit}
+          type="primary"
+          shape="round"
+        >
           Add Comment
         </Button>
       </Form.Item>
@@ -88,13 +121,11 @@ function PostDetail() {
                 alt={post.user.name}
               />
             }
-            content={
-              Editor({
-                onChange: handleChange,
-                onSubmit: handleSubmit,
-                value: currentComment,
-              })
-            }
+            content={Editor({
+              onChange: handleChange,
+              onSubmit: handleSubmit,
+              value: currentComment,
+            })}
           />
         </div>
       ) : (

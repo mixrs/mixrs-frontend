@@ -48,7 +48,9 @@ function Channels() {
       key: "details",
       render: (data) => (
         <div className="ChannelDetails">
-          <Link to={`/channels/${data.id}/posts`} className="Title">{data.title}</Link>
+          <Link to={`/channels/${data.id}/posts`} className="Title">
+            {data.title}
+          </Link>
           <p>{data.description}</p>
         </div>
       ),
@@ -89,6 +91,9 @@ function Channels() {
       if (mounted) {
         let data = items.data;
         let allChannels = [];
+        if (!data) {
+          return null;
+        }
         data.map((i) => {
           let c = {
             details: {
