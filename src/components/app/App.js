@@ -9,6 +9,7 @@ import Sidebar from "../sidebar/Sidebar";
 import { Layout } from "antd";
 import Dashboard from "../dashboard/Dashboard";
 import PostList from "../PostList/PostList";
+import PostDetail from "../PostDetail/PostDetail";
 
 const { Content } = Layout;
 
@@ -26,6 +27,7 @@ function App() {
           <Content className="ContentContainer">
             <Switch>
               <Route exact path="/" component={Dashboard} />
+              <Route path="/channels/:channelId/posts/:postId" component={PostDetail} />
               <Route path="/channels/:channelId/posts" component={PostList} />
               <Route path="/channels" component={Channels} />
             </Switch>

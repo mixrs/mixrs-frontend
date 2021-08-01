@@ -1,7 +1,7 @@
 import { Image, Table, Tag } from "antd";
 import React, { useState, useEffect } from "react";
 import { getAllChannels } from "../services/Channels";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Channels.css";
 
 function grabColor() {
@@ -18,7 +18,7 @@ function grabColor() {
   return tagColors[random];
 }
 
-function Channels({location}) {
+function Channels() {
   const [channelList, setChannelList] = useState([]);
 
   const columns = [
@@ -48,7 +48,9 @@ function Channels({location}) {
       key: "details",
       render: (data) => (
         <div className="ChannelDetails">
-          <Link to={`/channels/${data.id}/posts`} className="Title">{data.title}</Link>
+          <Link to={`/channels/${data.id}/posts`} className="Title">
+            {data.title}
+          </Link>
           <p>{data.description}</p>
         </div>
       ),
@@ -89,6 +91,9 @@ function Channels({location}) {
       if (mounted) {
         let data = items.data;
         let allChannels = [];
+        if (!data) {
+          return null;
+        }
         data.map((i) => {
           let c = {
             details: {
@@ -124,4 +129,4 @@ function Channels({location}) {
   );
 }
 
-export default withRouter(Channels);
+export default Channels;
