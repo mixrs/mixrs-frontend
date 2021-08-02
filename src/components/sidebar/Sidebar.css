@@ -22,3 +22,19 @@
 .Logo > svg {
   font-size: 3em;
 }
+
+.ant-layout-sider-children {
+  background-color: #421fff;
+}
+
+.ant-layout-sider-children > ul {
+  background-color: #421fff !important;
+}
+
+.ant-menu-item {
+  background-color: #421fff;
+}
+
+.ant-menu-item-selected {
+  background-color: #6a52e9 !important;
+}
