@@ -8,6 +8,11 @@
   align-items: center;
 }
 
+.Logo > a {
+  color: white;
+  text-decoration: none;
+}
+
 .Logo > p {
   font-size: 1em;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
