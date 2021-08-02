@@ -20,7 +20,6 @@ function App() {
       <Layout style={{ height: "100%" }}>
         <Sidebar />
         <Layout className="MainContainer">
-          {/* <Top collapsed={true} /> */}
           <Content className="ContentContainer">
             <Switch>
               <Route exact path="/" component={Dashboard} />
