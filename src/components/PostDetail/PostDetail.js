@@ -37,8 +37,9 @@ function PostDetail() {
       data.map((i) => {
         let newComment = {
           author: i.user.name,
-          avatar:
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+          avatar: i.user.image
+            ? `data:image/png;base64, ${i.user.image}`
+            : "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
           content: <p>{i.comment}</p>,
           datetime: moment(i.createdAt).fromNow(),
         };
@@ -58,16 +59,17 @@ function PostDetail() {
 
   const saveComment = () => {
     createComment(channelId, postId, {
-      userId: "a31b2a75-28ad-4660-a937-2b0685566d99",
+      userId: currentUser.id,
       comment: currentComment,
     })
       .then((res) => {
         console.log(res);
         setComments([
           {
-            author: post.user.name,
-            avatar:
-              "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+            author: currentUser.name,
+            avatar: currentUser.image
+              ? `data:image/png;base64, ${currentUser.image}`
+              : "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
             content: <p>{currentComment}</p>,
             datetime: moment().fromNow(),
           },
@@ -76,6 +78,18 @@ function PostDetail() {
       })
       .then(() => setCurrentComment(""));
   };
+
+  useEffect(() => {
+    let mounted = true;
+
+    if (mounted) {
+      fetchCurrentUser();
+    }
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     let mounted = true;
@@ -95,6 +109,10 @@ function PostDetail() {
     if (mounted) {
       fetchComments(channelId, postId);
     }
+
+    return () => {
+      mounted = false;
+    };
   }, [channelId, postId]);
 
   const handleChange = (e) => {
