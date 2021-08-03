@@ -1,15 +1,16 @@
-.ChannelContent {
-    margin-top: 20px;
+.Channels > h2 {
+    color: white;
 }
 
-.Divider {
+.Channels > .Divider {
     height: 1px;
     border: 0;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid grey;
 }
 
-.ChannelDetails > p:first-child {
-    font-weight: bold;
+.ChannelDetails > p {
+    font-weight: 400;
+    color: lightgrey;
 }
 
 .TagDetails {
@@ -20,7 +21,28 @@
 
 .Title {
     text-decoration: none;
-    color: black;
-    font-weight: 600;
-    font-size: medium;
+    font-weight: 700;
+    font-size: large;
+    color: lightgrey;
+}
+
+.Title:hover {
+    color: white;
+}
+
+table > thead > tr > th {
+    border-color: transparent !important;
+    color: white !important;
+}
+
+table > thead > tr > th {
+    background-color: #25262b !important;
+}
+
+table > tbody > tr > td {
+    border-color: transparent !important;
+}
+
+table > tbody > tr > td {
+    background-color: #25262b !important;
 }

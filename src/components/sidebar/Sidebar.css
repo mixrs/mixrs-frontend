@@ -24,17 +24,17 @@
 }
 
 .ant-layout-sider-children {
-  background-color: #421fff;
+  background-color: black;
 }
 
 .ant-layout-sider-children > ul {
-  background-color: #421fff !important;
+  background-color: black !important;
 }
 
 .ant-menu-item {
-  background-color: #421fff;
+  background-color: black;
 }
 
 .ant-menu-item-selected {
-  background-color: #6a52e9 !important;
+  background-color: #4989f1 !important;
 }

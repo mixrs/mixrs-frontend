@@ -7,9 +7,8 @@ import Channels from "../channels/Channels";
 import Sidebar from "../sidebar/Sidebar";
 import { Layout } from "antd";
 import Dashboard from "../dashboard/Dashboard";
-import PostList from "../PostList/PostList";
 import PostDetail from "../PostDetail/PostDetail";
-import Userbar from "../userbar/Userbar";
+import ChannelContent from "../ChannelContent/ChannelContent";
 
 const { Content } = Layout;
 
@@ -20,7 +19,6 @@ function App() {
     <div className="App">
       <Layout style={{ height: "100%" }}>
         <Sidebar />
-        <Userbar />
         <Layout className="MainContainer">
           <Content className="ContentContainer">
             <Switch>
@@ -29,7 +27,7 @@ function App() {
                 path="/channels/:channelId/posts/:postId"
                 component={PostDetail}
               />
-              <Route path="/channels/:channelId/posts" component={PostList} />
+              <Route path="/channels/:channelId" component={ChannelContent} />
               <Route path="/channels" component={Channels} />
             </Switch>
           </Content>

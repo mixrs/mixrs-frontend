@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./PostList.css";
 import { useParams } from "react-router-dom";
 import { getAllPosts } from "../services/Posts";
 import Post from "../Post/Post";
@@ -21,9 +20,7 @@ function PostList() {
   }, [channelId]);
 
   return (
-    <div className="Posts">
-      <h2>All Posts</h2>
-      <hr className="Divider" />
+    <div>
       {posts.map((post) => {
         return <Post data={post} key={post.id} />;
       })}

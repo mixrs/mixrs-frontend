@@ -1,9 +1,7 @@
-.PostDetail {
-}
-
 .PostDetail > h1 {
   text-align: center;
   font-size: 2em;
+  color: white;
 }
 
 .PostDetail > h4 {
@@ -38,6 +36,19 @@
 }
 
 .PostDetail > .PostContent {
-  padding: 20px;
+  padding: 30px;
   font-size: 1.2em;
+  color: white;
+}
+
+.ant-list-header {
+  color: lightgrey;
+}
+
+.ant-comment-content-author-name {
+  color: lightgrey;
+}
+
+.ant-comment-content-detail {
+  color: white;
 }

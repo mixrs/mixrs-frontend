@@ -3,7 +3,10 @@ import "./Dashboard.css";
 
 function Dashboard() {
   return (
-    <div>
+    <div className="Dashboard">
+      <h2>
+        Dashboard
+      </h2>
       <p>Home</p>
       <p>Home</p>
       <p>Home</p>

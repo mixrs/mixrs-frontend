@@ -1,3 +1,7 @@
+.Post {
+    padding: 15px;
+}
+
 .PostedBy {
     color: grey;
     display: flex;
@@ -14,19 +18,20 @@
     font-weight: 700;
     text-decoration: none;
     font-size: 1.5em;
-    color: black;
+    color: #999;
 }
 
 .Post > .PostTitle:hover {
-    text-decoration: underline;
+    color: white;
 }
 
 .Post > .PostContent {
     font-weight: 500;
+    color: lightgrey;
 }
 
 .Post > .Divider {
     height: 1px;
     border: 0;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid lightgrey;
 }
