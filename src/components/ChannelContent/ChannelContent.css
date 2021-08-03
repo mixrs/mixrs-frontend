@@ -1,0 +1,12 @@
+.ant-tabs-nav::before {
+    border-color: transparent !important;
+}
+
+.ant-tabs-tab-btn {
+    color: grey;
+    font-weight: 700;
+}
+
+.ant-tabs-tab-btn:hover {
+    color: white;
+}

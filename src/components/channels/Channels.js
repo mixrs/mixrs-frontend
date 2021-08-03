@@ -48,7 +48,7 @@ function Channels() {
       key: "details",
       render: (data) => (
         <div className="ChannelDetails">
-          <Link to={`/channels/${data.id}/posts`} className="Title">
+          <Link to={`/channels/${data.id}`} className="Title">
             {data.title}
           </Link>
           <p>{data.description}</p>
@@ -115,14 +115,19 @@ function Channels() {
   }, []);
 
   return (
-    <div className="Channel">
+    <div className="Channels">
       <h2>All Channels</h2>
       <hr className="Divider" />
-      <div className="ChannelContent">
+      <div>
         <Table
+          bordered={false}
           columns={columns}
           dataSource={channelList}
-          pagination={{ position: ["topLeft"] }}
+          pagination={
+            channelList.length > 10
+              ? { position: ["topLeft"] }
+              : { position: [] }
+          }
         />
       </div>
     </div>
