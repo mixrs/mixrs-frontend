@@ -7,8 +7,8 @@ import Channels from "../channels/Channels";
 import Sidebar from "../sidebar/Sidebar";
 import { Layout } from "antd";
 import Dashboard from "../dashboard/Dashboard";
-import PostDetail from "../PostDetail/PostDetail";
-import ChannelContent from "../ChannelContent/ChannelContent";
+import PostDetail from "../postdetail/PostDetail";
+import ChannelContent from "../channelcontent/ChannelContent";
 
 const { Content } = Layout;
 

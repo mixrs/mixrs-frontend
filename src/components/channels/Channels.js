@@ -1,8 +1,12 @@
-import { Image, Table, Tag } from "antd";
+import { Button, Card, Avatar, Row, Col } from "antd";
 import React, { useState, useEffect } from "react";
 import { getAllChannels } from "../services/Channels";
-import { Link } from "react-router-dom";
 import "./Channels.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import NewChannel from "../newchannel/NewChannel";
+
+const { Meta } = Card;
 
 function grabColor() {
   let tagColors = [
@@ -20,70 +24,7 @@ function grabColor() {
 
 function Channels() {
   const [channelList, setChannelList] = useState([]);
-
-  const columns = [
-    {
-      title: "",
-      dataIndex: "avatar",
-      key: "avatar",
-      width: 100,
-      render: () => (
-        <Image
-          width={100}
-          height={100}
-          src={`https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png?${Date.now()}`}
-          placeholder={
-            <Image
-              preview={false}
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png?x-oss-process=image/blur,r_50,s_50/quality,q_1/resize,m_mfit,h_200,w_200"
-              width={100}
-            />
-          }
-        />
-      ),
-    },
-    {
-      title: "Details",
-      dataIndex: "details",
-      key: "details",
-      render: (data) => (
-        <div className="ChannelDetails">
-          <Link to={`/channels/${data.id}`} className="Title">
-            {data.title}
-          </Link>
-          <p>{data.description}</p>
-        </div>
-      ),
-    },
-    {
-      title: "Tags",
-      dataIndex: "tags",
-      key: "tags",
-      width: 300,
-      render: (tags) => (
-        <div className="TagDetails">
-          {tags.map((tag) => {
-            return (
-              <Tag color={grabColor()} key={tag}>
-                {tag}
-              </Tag>
-            );
-          })}
-        </div>
-      ),
-    },
-    {
-      title: "Actions",
-      dataIndex: "actions",
-      key: "actions",
-      width: 300,
-      render: () => (
-        <div>
-          <a href="/">Edit</a>|<a href="/">Delete</a>
-        </div>
-      ),
-    },
-  ];
+  const [showChannelForm, setShowChannelForm] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -114,22 +55,57 @@ function Channels() {
     return () => (mounted = false);
   }, []);
 
+  const showDrawer = () => {
+    setShowChannelForm(true);
+  };
+
+  const onClose = () => {
+    setShowChannelForm(false);
+  };
+
   return (
     <div className="Channels">
-      <h2>All Channels</h2>
-      <hr className="Divider" />
-      <div>
-        <Table
-          bordered={false}
-          columns={columns}
-          dataSource={channelList}
-          pagination={
-            channelList.length > 10
-              ? { position: ["topLeft"] }
-              : { position: [] }
-          }
-        />
+      <div className="ChannelsTop">
+        <h2>All Channels</h2>
+        <Button
+          type="primary"
+          shape="round"
+          icon={<FontAwesomeIcon icon={faPlus} />}
+          onClick={showDrawer}
+        >
+          {" "}
+          New Channel
+        </Button>
+        <NewChannel onClose={onClose} visible={showChannelForm} />
       </div>
+      <hr className="Divider" />
+      <Row gutter={[16, 24]} style={{ padding: "20px" }} justify="center">
+        {channelList.map((channel) => {
+          return (
+            <Col className="gutter-row" key={channel.details.id}>
+              <Card
+                className="ChannelCard"
+                cover={
+                  <img
+                    alt="example"
+                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                    className="ChannelCardImage"
+                  />
+                }
+              >
+                <Meta
+                  avatar={
+                    <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                  }
+                  title={channel.details.title}
+                  description={channel.details.description}
+                  className="ChannelCardMeta"
+                />
+              </Card>
+            </Col>
+          );
+        })}
+      </Row>
     </div>
   );
 }

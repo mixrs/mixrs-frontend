@@ -52,3 +52,9 @@
 .ant-comment-content-detail {
   color: white;
 }
+
+.CommentTextArea {
+  border-radius: 10px;
+  background-color: #25262b;
+  color: white;
+}

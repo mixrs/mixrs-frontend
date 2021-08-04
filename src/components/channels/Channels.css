@@ -1,48 +1,77 @@
-.Channels > h2 {
-    color: white;
+.Channels > div > h2 {
+  color: white;
+}
+
+.Channels > .ChannelsTop {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ChannelCard {
+  width: 300px;
+  color: white;
+  border-radius: 25px;
+}
+
+img.ChannelCardImage {
+  border-radius: 25px;
+}
+
+.fa-plus {
+  margin-right: 5px;
 }
 
 .Channels > .Divider {
-    height: 1px;
-    border: 0;
-    border-top: 1px solid grey;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid grey;
 }
 
 .ChannelDetails > p {
-    font-weight: 400;
-    color: lightgrey;
+  font-weight: 400;
+  color: lightgrey;
+}
+
+.ChannelImage {
+  border-radius: 15px;
+  border: 2px solid white;
 }
 
 .TagDetails {
-    word-wrap: break-word;
-    word-break: break-all;
-    line-height: 30px;
+  word-wrap: break-word;
+  word-break: break-all;
+  line-height: 30px;
+}
+
+.TagDetails > .ChannelTag {
+  border-color: transparent;
+  border-radius: 10px;
 }
 
 .Title {
-    text-decoration: none;
-    font-weight: 700;
-    font-size: large;
-    color: lightgrey;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: large;
+  color: lightgrey;
 }
 
 .Title:hover {
-    color: white;
+  color: white;
 }
 
 table > thead > tr > th {
-    border-color: transparent !important;
-    color: white !important;
+  border-color: transparent !important;
+  color: white !important;
 }
 
 table > thead > tr > th {
-    background-color: #25262b !important;
+  background-color: #25262b !important;
 }
 
 table > tbody > tr > td {
-    border-color: transparent !important;
+  border-color: transparent !important;
 }
 
 table > tbody > tr > td {
-    background-color: #25262b !important;
+  background-color: #25262b !important;
 }

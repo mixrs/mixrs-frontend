@@ -5,7 +5,7 @@ import { Avatar, Image, Comment, Form, Input, Button } from "antd";
 import { useParams } from "react-router-dom";
 import { getPostById } from "../services/Posts";
 import { createComment, getComments } from "../services/Comments";
-import CommentList from "../CommentList/CommentList";
+import CommentList from "../commentlist/CommentList";
 import { getCurrentUser } from "../services/Users";
 const { TextArea } = Input;
 
@@ -130,7 +130,7 @@ function PostDetail() {
   const Editor = ({ onChange, onSubmit, value }) => (
     <>
       <Form.Item>
-        <TextArea rows={2} onChange={onChange} value={value} />
+        <TextArea rows={2} onChange={onChange} value={value} className="CommentTextArea" />
       </Form.Item>
       <Form.Item>
         <Button
