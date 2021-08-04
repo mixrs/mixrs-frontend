@@ -4,7 +4,7 @@ import { getAllChannels } from "../services/Channels";
 import "./Channels.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import NewChannel from "../newchannel/NewChannel";
+import NewChannel from "../NewChannel/NewChannel";
 
 const { Meta } = Card;
 

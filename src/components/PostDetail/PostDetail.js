@@ -5,7 +5,7 @@ import { Avatar, Image, Comment, Form, Input, Button } from "antd";
 import { useParams } from "react-router-dom";
 import { getPostById } from "../services/Posts";
 import { createComment, getComments } from "../services/Comments";
-import CommentList from "../commentlist/CommentList";
+import CommentList from "../CommentList/CommentList";
 import { getCurrentUser } from "../services/Users";
 const { TextArea } = Input;
 

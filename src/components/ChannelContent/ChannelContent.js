@@ -1,8 +1,8 @@
 import React from "react";
 import "./ChannelContent.css";
 import { Tabs } from "antd";
-import Announcements from "../announcements/Announcements";
-import PostList from "../postlist/PostList";
+import Announcements from "../Announcements/Announcements";
+import PostList from "../PostList/PostList";
 
 const { TabPane } = Tabs;
 

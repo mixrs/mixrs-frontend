@@ -3,12 +3,12 @@ import "./App.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { Switch, Route, withRouter } from "react-router-dom";
-import Channels from "../channels/Channels";
-import Sidebar from "../sidebar/Sidebar";
+import Channels from "../Channels/Channels";
+import Sidebar from "../Sidebar/Sidebar";
 import { Layout } from "antd";
-import Dashboard from "../dashboard/Dashboard";
-import PostDetail from "../postdetail/PostDetail";
-import ChannelContent from "../channelcontent/ChannelContent";
+import Dashboard from "../Dashboard/Dashboard";
+import PostDetail from "../PostDetail/PostDetail";
+import ChannelContent from "../ChannelContent/ChannelContent";
 
 const { Content } = Layout;
 

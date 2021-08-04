@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getAllPosts } from "../services/Posts";
-import Post from "../post/Post";
+import Post from "../Post/Post";
 
 function PostList() {
   let { channelId } = useParams();
