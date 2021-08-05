@@ -61,7 +61,7 @@ function Channels() {
     }
     getAllChannels().then((items) => {
       if (mounted) {
-        let data = items.data;
+        let data = items ? items.data : null;
         let allChannels = [];
         if (!data) {
           return null;
