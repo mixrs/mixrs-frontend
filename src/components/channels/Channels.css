@@ -1,0 +1,99 @@
+.Channels > div > h2 {
+  color: white;
+}
+
+.Channels > .ChannelsTop {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ChannelCard {
+  width: 300px;
+  color: white;
+  border-radius: 25px;
+  height: 400px;
+}
+
+.ant-card-meta-description {
+  height: 90px !important;
+}
+
+.ant-card-meta-description:hover {
+  overflow-y: scroll;
+}
+
+.ant-card-meta-description::-webkit-scrollbar {
+  width: 4px;
+  background-color: #25262b;
+}
+
+.ant-card-meta-description::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: white;
+}
+
+img.ChannelCardImage {
+  border-radius: 25px;
+  height: 250px;
+}
+
+.fa-plus {
+  margin-right: 5px;
+}
+
+.Channels > .Divider {
+  height: 1px;
+  border: 0;
+  border-top: 1px solid grey;
+}
+
+.ChannelDetails > p {
+  font-weight: 400;
+  color: lightgrey;
+}
+
+.ChannelImage {
+  border-radius: 15px;
+  border: 2px solid white;
+}
+
+.TagDetails {
+  word-wrap: break-word;
+  word-break: break-all;
+  line-height: 30px;
+}
+
+.TagDetails > .ChannelTag {
+  border-color: transparent;
+  border-radius: 10px;
+}
+
+.Title {
+  text-decoration: none;
+  font-weight: 700;
+  font-size: large;
+  color: lightgrey;
+}
+
+.Title:hover {
+  color: white;
+}
+
+table > thead > tr > th {
+  border-color: transparent !important;
+  color: white !important;
+}
+
+table > thead > tr > th {
+  background-color: #25262b !important;
+}
+
+table > tbody > tr > td {
+  border-color: transparent !important;
+}
+
+table > tbody > tr > td {
+  background-color: #25262b !important;
+}
