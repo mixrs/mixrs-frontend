@@ -4,13 +4,11 @@ export function getAllChannels() {
     .catch((err) => console.error(err));
 }
 
-export function createNewChannel(postDetails) {
+export function createNewChannel(formData) {
+  console.log(Array.from(formData));
   return fetch("http://localhost:8080/api/v1/channels", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(postDetails),
+    body: formData,
   })
     .then((data) => data.json())
     .catch((err) => console.error(err));

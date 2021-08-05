@@ -11,10 +11,32 @@
   width: 300px;
   color: white;
   border-radius: 25px;
+  height: 400px;
+}
+
+.ant-card-meta-description {
+  height: 90px !important;
+}
+
+.ant-card-meta-description:hover {
+  overflow-y: scroll;
+}
+
+.ant-card-meta-description::-webkit-scrollbar {
+  width: 4px;
+  background-color: #25262b;
+}
+
+.ant-card-meta-description::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: white;
 }
 
 img.ChannelCardImage {
   border-radius: 25px;
+  height: 250px;
 }
 
 .fa-plus {

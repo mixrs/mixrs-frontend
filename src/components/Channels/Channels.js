@@ -5,6 +5,8 @@ import "./Channels.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import NewChannel from "../NewChannel/NewChannel";
+import { useHistory } from "react-router-dom";
+import { getCurrentUser } from "../services/Users";
 
 const { Meta } = Card;
 
@@ -23,11 +25,40 @@ function grabColor() {
 }
 
 function Channels() {
+  const [alert, setAlert] = useState(false);
   const [channelList, setChannelList] = useState([]);
   const [showChannelForm, setShowChannelForm] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+  const history = useHistory();
+
+  const fetchCurrentUser = () => {
+    getCurrentUser().then((item) => {
+      let data = item.data;
+      if (!data) {
+        return null;
+      }
+
+      setCurrentUser(data);
+    });
+  };
 
   useEffect(() => {
     let mounted = true;
+
+    if (mounted) {
+      fetchCurrentUser();
+    }
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    let mounted = true;
+    if (channelList.length && !alert) {
+      return;
+    }
     getAllChannels().then((items) => {
       if (mounted) {
         let data = items.data;
@@ -41,6 +72,7 @@ function Channels() {
               id: i.id,
               title: i.title,
               description: i.description,
+              image: i.image,
             },
             tags: ["gaming", "humor", "memes"],
           };
@@ -49,11 +81,12 @@ function Channels() {
           return null;
         });
         setChannelList(allChannels);
+        setAlert(false);
       }
     });
 
     return () => (mounted = false);
-  }, []);
+  }, [alert, channelList]);
 
   const showDrawer = () => {
     setShowChannelForm(true);
@@ -73,10 +106,13 @@ function Channels() {
           icon={<FontAwesomeIcon icon={faPlus} />}
           onClick={showDrawer}
         >
-          {" "}
           New Channel
         </Button>
-        <NewChannel onClose={onClose} visible={showChannelForm} />
+        <NewChannel
+          onClose={onClose}
+          visible={showChannelForm}
+          setAlert={setAlert}
+        />
       </div>
       <hr className="Divider" />
       <Row gutter={[16, 24]} style={{ padding: "20px" }} justify="center">
@@ -88,14 +124,23 @@ function Channels() {
                 cover={
                   <img
                     alt="example"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                    src={`data:image/png;base64, ${channel.details.image}`}
                     className="ChannelCardImage"
                   />
                 }
+                onClick={() => {
+                  history.push(`/channels/${channel.details.id}`);
+                }}
               >
                 <Meta
                   avatar={
-                    <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                    <Avatar
+                      src={
+                        currentUser
+                          ? `data:image/png;base64, ${currentUser.image}`
+                          : ""
+                      }
+                    />
                   }
                   title={channel.details.title}
                   description={channel.details.description}
