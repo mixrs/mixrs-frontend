@@ -25,6 +25,7 @@ function NewChannel({ onClose, visible, channels, setChannelList }) {
 
   const onFinish = () => {
     form.validateFields().then((values) => {
+      console.log(tags);
       let formData = new FormData();
       for (const name in values) {
         if (name === "tags") {
@@ -49,6 +50,7 @@ function NewChannel({ onClose, visible, channels, setChannelList }) {
       });
       form.resetFields();
       setImageUrl("");
+      setTags([]);
     });
   };
 
@@ -111,8 +113,8 @@ function NewChannel({ onClose, visible, channels, setChannelList }) {
       }
     >
       <Form layout="vertical" form={form}>
-        <Row gutter={24}>
-          <Col span={4}>
+        <Row justify="center" align="top" gutter={24}>
+          <Col span={24}>
             <Form.Item
               label="Image"
               name="avatar"
@@ -134,20 +136,20 @@ function NewChannel({ onClose, visible, channels, setChannelList }) {
               </Upload>
             </Form.Item>
           </Col>
-          <Col span={20}>
-            <Form.Item label="Tags" name="tags">
-              <NewChannelTags tags={tags} setTags={setTags} />
-            </Form.Item>
-          </Col>
         </Row>
         <Row gutter={16}>
-          <Col span={24}>
+          <Col span={8}>
             <Form.Item
               name="title"
               label="Title"
               rules={[{ required: true, message: "Please enter channel name" }]}
             >
               <Input placeholder="Please enter channel name" />
+            </Form.Item>
+          </Col>
+          <Col span={16}>
+            <Form.Item label="Tags" name="tags">
+              <NewChannelTags tags={tags} setTags={setTags} />
             </Form.Item>
           </Col>
         </Row>

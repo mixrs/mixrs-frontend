@@ -93,31 +93,29 @@ function Channels() {
                     description={channel.description}
                     className="ChannelCardMeta"
                   />
-                  <Tooltip title={channel.tags.join(", ")}>
-                    <Row
-                      gutter={[4, 2]}
-                      justify="left"
-                      align="middle"
-                    >
-                      {channel.tags.slice(0, 2).map((tag) => {
-                        return (
-                          <Col className="gutter-row">
-                            <Tag
-                              color={`${grabColor()}`}
-                              className="ChannelTags"
-                            >
-                              {tag}
-                            </Tag>
-                          </Col>
-                        );
-                      })}
-                      {moreThanTwoTags ? (
-                        <div style={{ color: "red" }}>+more...</div>
-                      ) : (
-                        ""
-                      )}
-                    </Row>
-                  </Tooltip>
+                  {channel.tags.length !== 1 && channel.tags[0] !== "" ? (
+                    <Tooltip title={channel.tags.join(", ")}>
+                      <Row gutter={[4, 2]} justify="left" align="middle">
+                        {channel.tags.slice(0, 2).map((tag) => {
+                          return (
+                            <Col className="gutter-row" key={tag}>
+                              <Tag
+                                color={`${grabColor()}`}
+                                className="ChannelTags"
+                              >
+                                {tag}
+                              </Tag>
+                            </Col>
+                          );
+                        })}
+                        {moreThanTwoTags ? (
+                          <div style={{ color: "red" }}>+more...</div>
+                        ) : (
+                          ""
+                        )}
+                      </Row>
+                    </Tooltip>
+                  ) : null}
                 </Card>
               </Col>
             );
