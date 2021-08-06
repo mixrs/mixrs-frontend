@@ -3,12 +3,13 @@ import "./Sidebar.css";
 import { Layout, Menu } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers, faHome } from "@fortawesome/free-solid-svg-icons";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 
 const { Sider } = Layout;
 
 function Sidebar() {
   const location = useLocation();
+  const history = useHistory();
 
   let selectedKey = 1;
   if (location.pathname === "/") {
@@ -22,7 +23,12 @@ function Sidebar() {
 
   return (
     <Sider collapsed={true}>
-      <div className="Logo">
+      <div
+        className="Logo"
+        onClick={() => {
+          history.push("/");
+        }}
+      >
         <FontAwesomeIcon icon={["fab", "mendeley"]} />
         <p>MiXrS</p>
       </div>
