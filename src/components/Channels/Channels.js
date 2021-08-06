@@ -1,4 +1,4 @@
-import { Button, Card, Avatar, Row, Col } from "antd";
+import { Button, Card, Row, Col, Tag, Tooltip } from "antd";
 import React, { useState, useEffect } from "react";
 import { getAllChannels } from "../services/Channels";
 import "./Channels.css";
@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import NewChannel from "../NewChannel/NewChannel";
 import { useHistory } from "react-router-dom";
-import { getCurrentUser } from "../services/Users";
 import Title from "antd/lib/typography/Title";
 
 const { Meta } = Card;
@@ -28,31 +27,7 @@ function grabColor() {
 function Channels() {
   const [channelList, setChannelList] = useState([]);
   const [showChannelForm, setShowChannelForm] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
   const history = useHistory();
-
-  const fetchCurrentUser = () => {
-    getCurrentUser().then((item) => {
-      let data = item.data;
-      if (!data) {
-        return null;
-      }
-
-      setCurrentUser(data);
-    });
-  };
-
-  useEffect(() => {
-    let mounted = true;
-
-    if (mounted) {
-      fetchCurrentUser();
-    }
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
 
   useEffect(() => {
     let mounted = true;
@@ -97,6 +72,7 @@ function Channels() {
       <Row gutter={[16, 24]} style={{ padding: "20px" }} justify="center">
         {channelList.length !== 0 ? (
           channelList.map((channel) => {
+            let moreThanTwoTags = channel.tags.length > 2;
             return (
               <Col className="gutter-row" key={channel.id}>
                 <Card
@@ -113,19 +89,35 @@ function Channels() {
                   }}
                 >
                   <Meta
-                    avatar={
-                      <Avatar
-                        src={
-                          currentUser
-                            ? `data:image/png;base64, ${currentUser.image}`
-                            : ""
-                        }
-                      />
-                    }
                     title={channel.title}
                     description={channel.description}
                     className="ChannelCardMeta"
                   />
+                  <Tooltip title={channel.tags.join(", ")}>
+                    <Row
+                      gutter={[4, 2]}
+                      justify="left"
+                      align="middle"
+                    >
+                      {channel.tags.slice(0, 2).map((tag) => {
+                        return (
+                          <Col className="gutter-row">
+                            <Tag
+                              color={`${grabColor()}`}
+                              className="ChannelTags"
+                            >
+                              {tag}
+                            </Tag>
+                          </Col>
+                        );
+                      })}
+                      {moreThanTwoTags ? (
+                        <div style={{ color: "red" }}>+more...</div>
+                      ) : (
+                        ""
+                      )}
+                    </Row>
+                  </Tooltip>
                 </Card>
               </Col>
             );

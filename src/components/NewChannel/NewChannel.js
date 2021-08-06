@@ -3,11 +3,13 @@ import "./NewChannel.css";
 import { Drawer, Form, Button, Col, Row, Input, Upload } from "antd";
 import { createNewChannel } from "../services/Channels";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import NewChannelTags from "../NewChannelTags/NewChannelTags";
 
 function NewChannel({ onClose, visible, channels, setChannelList }) {
   const [form] = Form.useForm();
   const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
+  const [tags, setTags] = useState([]);
 
   const dummyRequest = ({ onSuccess }) => {
     setTimeout(() => {
@@ -25,8 +27,8 @@ function NewChannel({ onClose, visible, channels, setChannelList }) {
     form.validateFields().then((values) => {
       let formData = new FormData();
       for (const name in values) {
-        if (name === "avatar") {
-          formData.append(name, values[name]);
+        if (name === "tags") {
+          formData.append(name, tags.join(","));
           continue;
         }
         formData.append(name, values[name]);
@@ -41,7 +43,7 @@ function NewChannel({ onClose, visible, channels, setChannelList }) {
             title: data.title,
             description: data.description,
             image: data.image,
-            tags: ["gaming", "humor", "memes"],
+            tags: data.tags,
           },
         ]);
       });
@@ -110,7 +112,7 @@ function NewChannel({ onClose, visible, channels, setChannelList }) {
     >
       <Form layout="vertical" form={form}>
         <Row gutter={24}>
-          <Col span={24}>
+          <Col span={4}>
             <Form.Item
               label="Image"
               name="avatar"
@@ -130,6 +132,11 @@ function NewChannel({ onClose, visible, channels, setChannelList }) {
                   uploadButton
                 )}
               </Upload>
+            </Form.Item>
+          </Col>
+          <Col span={20}>
+            <Form.Item label="Tags" name="tags">
+              <NewChannelTags tags={tags} setTags={setTags} />
             </Form.Item>
           </Col>
         </Row>
