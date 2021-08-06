@@ -10,7 +10,6 @@ function NewPost({ onClose, visible, setAlert }) {
 
   const onFinish = () => {
     form.validateFields().then((values) => {
-      values.userId = "240e94d1-a203-4456-91c9-09cbe7df2c6e";
       onClose();
       createPost(values, channelId).then((res) => {
         setAlert(true);

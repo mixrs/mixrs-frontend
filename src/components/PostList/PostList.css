@@ -1,3 +1,7 @@
 .PostList {
     padding: 15px;
 }
+
+.PostList > h2 {
+    color: white;
+}

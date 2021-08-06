@@ -7,6 +7,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import NewChannel from "../NewChannel/NewChannel";
 import { useHistory } from "react-router-dom";
 import { getCurrentUser } from "../services/Users";
+import Title from "antd/lib/typography/Title";
 
 const { Meta } = Card;
 
@@ -56,7 +57,7 @@ function Channels() {
 
   useEffect(() => {
     let mounted = true;
-    if (channelList.length && !alert) {
+    if (!alert) {
       return;
     }
     getAllChannels().then((items) => {
@@ -116,40 +117,42 @@ function Channels() {
       </div>
       <hr className="Divider" />
       <Row gutter={[16, 24]} style={{ padding: "20px" }} justify="center">
-        {channelList.map((channel) => {
-          return (
-            <Col className="gutter-row" key={channel.details.id}>
-              <Card
-                className="ChannelCard"
-                cover={
-                  <img
-                    alt="example"
-                    src={`data:image/png;base64, ${channel.details.image}`}
-                    className="ChannelCardImage"
-                  />
-                }
-                onClick={() => {
-                  history.push(`/channels/${channel.details.id}`);
-                }}
-              >
-                <Meta
-                  avatar={
-                    <Avatar
-                      src={
-                        currentUser
-                          ? `data:image/png;base64, ${currentUser.image}`
-                          : ""
+        {channelList.length !== 0
+          ? channelList.map((channel) => {
+              return (
+                <Col className="gutter-row" key={channel.details.id}>
+                  <Card
+                    className="ChannelCard"
+                    cover={
+                      <img
+                        alt="example"
+                        src={`data:image/png;base64, ${channel.details.image}`}
+                        className="ChannelCardImage"
+                      />
+                    }
+                    onClick={() => {
+                      history.push(`/channels/${channel.details.id}`);
+                    }}
+                  >
+                    <Meta
+                      avatar={
+                        <Avatar
+                          src={
+                            currentUser
+                              ? `data:image/png;base64, ${currentUser.image}`
+                              : ""
+                          }
+                        />
                       }
+                      title={channel.details.title}
+                      description={channel.details.description}
+                      className="ChannelCardMeta"
                     />
-                  }
-                  title={channel.details.title}
-                  description={channel.details.description}
-                  className="ChannelCardMeta"
-                />
-              </Card>
-            </Col>
-          );
-        })}
+                  </Card>
+                </Col>
+              );
+            })
+          : <Title level={2}>No channels yet...</Title>}
       </Row>
     </div>
   );

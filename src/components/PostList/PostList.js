@@ -7,6 +7,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Post from "../Post/Post";
 import "./PostList.css";
 import NewPost from "../NewPost/NewPost";
+import Title from "antd/lib/typography/Title";
 
 function PostList() {
   let { channelId } = useParams();
@@ -18,7 +19,7 @@ function PostList() {
   useEffect(() => {
     let mounted = true;
 
-    if (posts.length && !alert) {
+    if (!alert) {
       return;
     }
 
@@ -47,13 +48,18 @@ function PostList() {
         shape="round"
         icon={<FontAwesomeIcon icon={faPlus} />}
         onClick={showDrawer}
+        style={{ marginBottom: "20px" }}
       >
         New Post
       </Button>
       <NewPost onClose={onClose} visible={showPostForm} setAlert={setAlert} />
-      {posts.map((post) => {
-        return <Post data={post} key={post.id} />;
-      })}
+      {posts.length !== 0 ? (
+        posts.map((post) => {
+          return <Post data={post} key={post.id} />;
+        })
+      ) : (
+        <Title level={2}>No posts yet...</Title>
+      )}
     </div>
   );
 }
