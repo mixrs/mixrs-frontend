@@ -4,7 +4,7 @@ import { Drawer, Form, Button, Col, Row, Input, Upload } from "antd";
 import { createNewChannel } from "../services/Channels";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 
-function NewChannel({ onClose, visible, setAlert }) {
+function NewChannel({ onClose, visible, channels, setChannelList }) {
   const [form] = Form.useForm();
   const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
@@ -33,10 +33,20 @@ function NewChannel({ onClose, visible, setAlert }) {
       }
       onClose();
       createNewChannel(formData).then((res) => {
-        setAlert(true);
+        let data = res.data;
+        setChannelList([
+          ...channels,
+          {
+            id: data.id,
+            title: data.title,
+            description: data.description,
+            image: data.image,
+            tags: ["gaming", "humor", "memes"],
+          },
+        ]);
       });
       form.resetFields();
-      setImageUrl("")
+      setImageUrl("");
     });
   };
 

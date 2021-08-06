@@ -12,26 +12,20 @@ import Title from "antd/lib/typography/Title";
 function PostList() {
   let { channelId } = useParams();
 
-  const [alert, setAlert] = useState(false);
   const [posts, setPosts] = useState([]);
   const [showPostForm, setShowPostForm] = useState(false);
 
   useEffect(() => {
     let mounted = true;
 
-    if (!alert) {
-      return;
-    }
-
     getAllPosts(channelId).then((items) => {
       if (mounted) {
         setPosts(items.data);
-        setAlert(false);
       }
     });
 
     return () => (mounted = false);
-  }, [posts, alert, channelId]);
+  }, [channelId]);
 
   const showDrawer = () => {
     setShowPostForm(true);
@@ -52,7 +46,12 @@ function PostList() {
       >
         New Post
       </Button>
-      <NewPost onClose={onClose} visible={showPostForm} setAlert={setAlert} />
+      <NewPost
+        onClose={onClose}
+        visible={showPostForm}
+        posts={posts}
+        setPosts={setPosts}
+      />
       {posts.length !== 0 ? (
         posts.map((post) => {
           return <Post data={post} key={post.id} />;

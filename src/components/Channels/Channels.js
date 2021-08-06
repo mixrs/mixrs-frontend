@@ -26,7 +26,6 @@ function grabColor() {
 }
 
 function Channels() {
-  const [alert, setAlert] = useState(false);
   const [channelList, setChannelList] = useState([]);
   const [showChannelForm, setShowChannelForm] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
@@ -57,37 +56,15 @@ function Channels() {
 
   useEffect(() => {
     let mounted = true;
-    if (!alert) {
-      return;
-    }
+
     getAllChannels().then((items) => {
       if (mounted) {
-        let data = items ? items.data : null;
-        let allChannels = [];
-        if (!data) {
-          return null;
-        }
-        data.map((i) => {
-          let c = {
-            details: {
-              id: i.id,
-              title: i.title,
-              description: i.description,
-              image: i.image,
-            },
-            tags: ["gaming", "humor", "memes"],
-          };
-
-          allChannels.push(c);
-          return null;
-        });
-        setChannelList(allChannels);
-        setAlert(false);
+        setChannelList(items.data);
       }
     });
 
     return () => (mounted = false);
-  }, [alert, channelList]);
+  }, []);
 
   const showDrawer = () => {
     setShowChannelForm(true);
@@ -112,47 +89,50 @@ function Channels() {
         <NewChannel
           onClose={onClose}
           visible={showChannelForm}
-          setAlert={setAlert}
+          channels={channelList}
+          setChannelList={setChannelList}
         />
       </div>
       <hr className="Divider" />
       <Row gutter={[16, 24]} style={{ padding: "20px" }} justify="center">
-        {channelList.length !== 0
-          ? channelList.map((channel) => {
-              return (
-                <Col className="gutter-row" key={channel.details.id}>
-                  <Card
-                    className="ChannelCard"
-                    cover={
-                      <img
-                        alt="example"
-                        src={`data:image/png;base64, ${channel.details.image}`}
-                        className="ChannelCardImage"
+        {channelList.length !== 0 ? (
+          channelList.map((channel) => {
+            return (
+              <Col className="gutter-row" key={channel.id}>
+                <Card
+                  className="ChannelCard"
+                  cover={
+                    <img
+                      alt="example"
+                      src={`data:image/png;base64, ${channel.image}`}
+                      className="ChannelCardImage"
+                    />
+                  }
+                  onClick={() => {
+                    history.push(`/channels/${channel.id}`);
+                  }}
+                >
+                  <Meta
+                    avatar={
+                      <Avatar
+                        src={
+                          currentUser
+                            ? `data:image/png;base64, ${currentUser.image}`
+                            : ""
+                        }
                       />
                     }
-                    onClick={() => {
-                      history.push(`/channels/${channel.details.id}`);
-                    }}
-                  >
-                    <Meta
-                      avatar={
-                        <Avatar
-                          src={
-                            currentUser
-                              ? `data:image/png;base64, ${currentUser.image}`
-                              : ""
-                          }
-                        />
-                      }
-                      title={channel.details.title}
-                      description={channel.details.description}
-                      className="ChannelCardMeta"
-                    />
-                  </Card>
-                </Col>
-              );
-            })
-          : <Title level={2}>No channels yet...</Title>}
+                    title={channel.title}
+                    description={channel.description}
+                    className="ChannelCardMeta"
+                  />
+                </Card>
+              </Col>
+            );
+          })
+        ) : (
+          <Title level={2}>No channels yet...</Title>
+        )}
       </Row>
     </div>
   );

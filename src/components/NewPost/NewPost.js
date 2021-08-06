@@ -3,8 +3,9 @@ import "./NewPost.css";
 import { Drawer, Form, Button, Col, Row, Input } from "antd";
 import { createPost } from "../services/Posts";
 import { useParams } from "react-router-dom";
+import { getUserById } from "../services/Users";
 
-function NewPost({ onClose, visible, setAlert }) {
+function NewPost({ onClose, visible, posts, setPosts }) {
   const [form] = Form.useForm();
   let { channelId } = useParams();
 
@@ -12,7 +13,25 @@ function NewPost({ onClose, visible, setAlert }) {
     form.validateFields().then((values) => {
       onClose();
       createPost(values, channelId).then((res) => {
-        setAlert(true);
+        let data = res.data;
+        let userId = data.user.id;
+        getUserById(userId).then((res) => {
+          setPosts([
+            ...posts,
+            {
+              id: data.id,
+              title: data.title,
+              content: data.content,
+              createdAt: data.createdAt,
+              updatedAt: data.updatedAt,
+              user: {
+                id: res.data.id,
+                name: res.data.name,
+                image: res.data.image,
+              },
+            },
+          ]);
+        });
       });
       form.resetFields();
     });
