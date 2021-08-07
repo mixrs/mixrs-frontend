@@ -13,3 +13,9 @@ export function createNewChannel(formData) {
     .then((data) => data.json())
     .catch((err) => console.error(err));
 }
+
+export function getChannelById(channelId) {
+  return fetch(`http://localhost:8080/api/v1/channels/${channelId}`)
+    .then((data) => data.json())
+    .catch((err) => console.error(err));
+}

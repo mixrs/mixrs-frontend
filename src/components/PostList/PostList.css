@@ -2,6 +2,22 @@
     padding: 15px;
 }
 
-.PostList > h2 {
+.PostList > .PostListHeader > h2 {
     color: white;
+}
+
+.PostList > .PostListChannelTags > .ChannelTags {
+    border-radius: 20px;
+    padding: 5px;
+    margin: 5px 2px;
+}
+
+.PostList > .PostListHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.PostList > .PostListContent {
+    margin-top: 20px;
 }

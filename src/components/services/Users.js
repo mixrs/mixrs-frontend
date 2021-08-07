@@ -1,6 +1,6 @@
 export function getCurrentUser() {
   return fetch(
-    `http://localhost:8080/api/v1/users/2a1a37c5-4eff-4826-b2fc-28f8d52070ae`
+    `http://localhost:8080/api/v1/users/30a39216-628e-48bd-a254-e2c8ed35e828`
   ).then((data) => data.json());
 }
 
