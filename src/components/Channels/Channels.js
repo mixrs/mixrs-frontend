@@ -69,7 +69,12 @@ function Channels() {
         />
       </div>
       <hr className="Divider" />
-      <Row gutter={[16, 24]} style={{ padding: "20px" }} justify="center">
+      <Row
+        gutter={[16, 24]}
+        style={{ padding: "20px" }}
+        justify="center"
+        className="ChannelsContainer"
+      >
         {channelList.length !== 0 ? (
           channelList.map((channel) => {
             let moreThanTwoTags = channel.tags.length > 2;

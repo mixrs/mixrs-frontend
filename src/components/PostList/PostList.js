@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Button, Row, Tag } from "antd";
+import { Button, Tag } from "antd";
 import { useParams } from "react-router-dom";
 import { getAllPosts } from "../services/Posts";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Post from "../Post/Post";
 import "./PostList.css";
 import NewPost from "../NewPost/NewPost";
@@ -66,13 +64,12 @@ function PostList() {
   return (
     <div className="PostList">
       <div className="PostListHeader">
-        <Title level={2}>{currentChannel.title}</Title>
+        <Title level={3}>{currentChannel.title}</Title>
         <Button
           type="primary"
           shape="round"
-          icon={<FontAwesomeIcon icon={faPlus} />}
           onClick={showDrawer}
-          style={{ marginBottom: "20px" }}
+          size="small"
         >
           New Post
         </Button>
@@ -94,13 +91,15 @@ function PostList() {
         posts={posts}
         setPosts={setPosts}
       />
-      <div clasName="PostListContent">
+      <div className="PostListContent">
         {posts.length !== 0 ? (
           posts.map((post) => {
             return <Post data={post} key={post.id} />;
           })
         ) : (
-          <Title level={2} style={{color: "white", marginTop: "10px"}}>No posts yet...</Title>
+          <Title level={2} style={{ color: "white", marginTop: "10px" }}>
+            No posts yet...
+          </Title>
         )}
       </div>
     </div>

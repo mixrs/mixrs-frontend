@@ -10,3 +10,11 @@
 .ant-tabs-tab-btn:hover {
     color: white;
 }
+
+.ChannelContent {
+    height: 100%;
+}
+
+.ChannelContent > .ChannelContentTabs {
+    height: 10%
+}

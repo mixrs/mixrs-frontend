@@ -23,6 +23,13 @@
   font-size: 3em;
 }
 
+.Sidebar {
+  width: 50px !important;
+  max-width: 50px !important;
+  min-width: 50px !important;
+  flex: 0 0 50px !important;
+}
+
 .ant-layout-sider-children {
   background-color: black;
 }

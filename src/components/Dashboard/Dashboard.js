@@ -4,28 +4,31 @@ import "./Dashboard.css";
 function Dashboard() {
   return (
     <div className="Dashboard">
-      <h2>
-        Dashboard
-      </h2>
-      <p>Home</p>
-      <p>Home</p>
-      <p>Home</p>
-      <p>Home</p>
-      <p>Home</p>
-      <p>Home</p>
-      <p>Home</p>
-      <p>Home</p>
-      <p>Home</p>
-      <p>Home</p>
-      <p>Home</p>
-      <p>Home</p>
-      <p>Home</p>
-      <p>Home</p>
-      <p>Home</p>
-      <p>Home</p>
-      <p>Home</p>
-      <p>Home</p>
-      <p>Home</p>
+      <div className="DashboardTop">
+        <h2>Dashboard</h2>
+        <hr className="Divider" />
+      </div>
+      <div className="DashboardContainer">
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+        <p>Home</p>
+      </div>
     </div>
   );
 }

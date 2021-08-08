@@ -1,37 +1,37 @@
 .Post {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .PostedBy {
-    color: grey;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-bottom: 5px;
+  color: grey;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 5px;
 }
 
 .PostedBy > .Author {
-    margin-left: 5px;
+  margin-left: 5px;
 }
 
 .Post > .PostTitle {
-    font-weight: 700;
-    text-decoration: none;
-    font-size: 1.5em;
-    color: #999;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1.5em;
+  color: #999;
 }
 
 .Post > .PostTitle:hover {
-    color: white;
+  color: white;
 }
 
 .Post > .PostContent {
-    font-weight: 500;
-    color: lightgrey;
+  font-weight: 500;
+  color: lightgrey;
 }
 
 .Post > .Divider {
-    height: 1px;
-    border: 0;
-    border-top: 1px solid lightgrey;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid lightgrey;
 }

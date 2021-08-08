@@ -9,14 +9,16 @@ const { TabPane } = Tabs;
 function ChannelContent() {
   return (
     <div className="ChannelContent">
-      <Tabs defaultActiveKey="1">
-        <TabPane tab="Posts" key="1">
-          <PostList />
-        </TabPane>
-        <TabPane tab="Announcements" key="2">
-          <Announcements />
-        </TabPane>
-      </Tabs>
+      <div className="ChannelContentTabs">
+        <Tabs defaultActiveKey="1">
+          <TabPane tab="Posts" key="1">
+            <PostList />
+          </TabPane>
+          <TabPane tab="Announcements" key="2">
+            <Announcements />
+          </TabPane>
+        </Tabs>
+      </div>
     </div>
   );
 }

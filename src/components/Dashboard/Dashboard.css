@@ -1,7 +1,39 @@
-.Dashboard > h2 {
-    color: white;
+.Dashboard {
+  color: white;
+  height: 100%;
 }
 
-.Dashboard > p {
-    color: white;
+.Dashboard > .DashboardTop > h2 {
+  color: white;
+}
+
+.Dashboard > .DashboardTop {
+  height: 5%;
+}
+
+.Dashboard > .DashboardContainer {
+  padding: 10px 0px;
+  margin-top: 20px;
+  height: 95%;
+  overflow-y: scroll;
+}
+
+.Dashboard > .DashboardContainer::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background-color: #25262b;
+}
+
+.Dashboard > .DashboardContainer::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: #25262b;
+}
+
+.Dashboard > .DashboardContainer::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #555;
 }

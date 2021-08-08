@@ -22,7 +22,7 @@ function Sidebar() {
   }
 
   return (
-    <Sider collapsed={true}>
+    <Sider collapsed={true} className="Sidebar">
       <div
         className="Logo"
         onClick={() => {
