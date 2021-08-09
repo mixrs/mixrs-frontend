@@ -1,37 +1,33 @@
 import React from "react";
-import "./App.css";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fab } from "@fortawesome/free-brands-svg-icons";
+import "./App.scss";
 import { Switch, Route, withRouter } from "react-router-dom";
 import Channels from "../Channels/Channels";
-import Sidebar from "../Sidebar/Sidebar";
 import { Layout } from "antd";
-import Dashboard from "../Dashboard/Dashboard";
-import PostDetail from "../PostDetail/PostDetail";
-import ChannelContent from "../ChannelContent/ChannelContent";
+import Topbar from "../Topbar/Topbar";
+import { Content } from "antd/lib/layout/layout";
 
-const { Content } = Layout;
-
-library.add(fab);
+const { Footer } = Layout;
 
 function App() {
   return (
     <div className="App">
-      <Layout style={{ height: "100%" }}>
-        <Sidebar />
-        <Layout className="MainContainer">
-          <Content className="ContentContainer">
-            <Switch>
-              <Route exact path="/" component={Dashboard} />
-              <Route
-                path="/channels/:channelId/posts/:postId"
-                component={PostDetail}
-              />
-              <Route path="/channels/:channelId" component={ChannelContent} />
-              <Route path="/channels" component={Channels} />
-            </Switch>
-          </Content>
-        </Layout>
+      <Layout>
+        <Topbar />
+        <Content
+          style={{
+            padding: "0 50px",
+            marginTop: 64,
+            paddingTop: 30,
+            paddingBottom: 30,
+          }}
+        >
+          <Switch>
+            <Route path="/channels" component={Channels} />
+          </Switch>
+        </Content>
+        <Footer style={{ textAlign: "center", backgroundColor: "white" }}>
+          Ant Design ©2018 Created by Ant UED
+        </Footer>
       </Layout>
     </div>
   );

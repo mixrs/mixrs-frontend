@@ -1,0 +1,27 @@
+.Topbar {
+  padding: 10px;
+  font-size: 0.9em;
+
+  .TopbarBrand {
+    font-size: 1.2em;
+  }
+
+  .TopbarToggle {
+    font-size: 0.9em;
+  }
+
+  .TopbarSearchBar {
+    font-size: 0.9em;
+    border-radius: 20px;
+  }
+
+  .TopbarSearchButton {
+    margin-left: 5px;
+    font-size: 0.9em;
+    border-radius: 20px;
+  }
+
+  .TopbarDropdownItem {
+    font-size: 0.9em;
+  }
+}
