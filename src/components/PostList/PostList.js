@@ -1,45 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { Button, Tag } from "antd";
 import { useParams } from "react-router-dom";
 import { getAllPosts } from "../services/Posts";
-import Post from "../Post/Post";
 import "./PostList.css";
-import NewPost from "../NewPost/NewPost";
 import Title from "antd/lib/typography/Title";
-import { getChannelById } from "../services/Channels";
+import Post from "../Post/Post";
 
-function grabColor() {
-  let tagColors = [
-    "red",
-    "green",
-    "blue",
-    "magenta",
-    "orange",
-    "cyan",
-    "geekblue",
-  ];
-  let random = Math.floor(Math.random() * tagColors.length);
-  return tagColors[random];
-}
+// function grabColor() {
+//   let tagColors = [
+//     "red",
+//     "green",
+//     "blue",
+//     "magenta",
+//     "orange",
+//     "cyan",
+//     "geekblue",
+//   ];
+//   let random = Math.floor(Math.random() * tagColors.length);
+//   return tagColors[random];
+// }
 
 function PostList() {
   let { channelId } = useParams();
 
   const [posts, setPosts] = useState([]);
-  const [showPostForm, setShowPostForm] = useState(false);
-  const [currentChannel, setCurrentChannel] = useState([]);
-
-  useEffect(() => {
-    let mounted = true;
-
-    getChannelById(channelId).then((channel) => {
-      if (mounted) {
-        setCurrentChannel(channel.data);
-      }
-    });
-
-    return () => (mounted = false);
-  }, [channelId]);
 
   useEffect(() => {
     let mounted = true;
@@ -53,55 +36,12 @@ function PostList() {
     return () => (mounted = false);
   }, [channelId]);
 
-  const showDrawer = () => {
-    setShowPostForm(true);
-  };
-
-  const onClose = () => {
-    setShowPostForm(false);
-  };
-
   return (
     <div className="PostList">
-      <div className="PostListHeader">
-        <Title level={3}>{currentChannel.title}</Title>
-        <Button
-          type="primary"
-          shape="round"
-          onClick={showDrawer}
-          size="small"
-        >
-          New Post
-        </Button>
-      </div>
-      <div className="PostListChannelTags">
-        {currentChannel.tags
-          ? currentChannel.tags.map((tag) => {
-              return (
-                <Tag color={`${grabColor()}`} key={tag} className="ChannelTags">
-                  {tag}
-                </Tag>
-              );
-            })
-          : ""}
-      </div>
-      <NewPost
-        onClose={onClose}
-        visible={showPostForm}
-        posts={posts}
-        setPosts={setPosts}
-      />
-      <div className="PostListContent">
-        {posts.length !== 0 ? (
-          posts.map((post) => {
-            return <Post data={post} key={post.id} />;
-          })
-        ) : (
-          <Title level={2} style={{ color: "white", marginTop: "10px" }}>
-            No posts yet...
-          </Title>
-        )}
-      </div>
+      <Title level={4}>{`Posts (${posts.length})`}</Title>
+      {posts.map((post) => {
+        return <Post data={post} key={post.id} />;
+      })}
     </div>
   );
 }

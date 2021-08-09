@@ -5,23 +5,25 @@ import Channels from "../Channels/Channels";
 import { Layout } from "antd";
 import Topbar from "../Topbar/Topbar";
 import { Content } from "antd/lib/layout/layout";
+import ChannelContent from "../ChannelContent/ChannelContent";
 
 const { Footer } = Layout;
 
 function App() {
   return (
     <div className="App">
-      <Layout>
+      <Layout style={{ backgroundColor: "white" }}>
         <Topbar />
         <Content
           style={{
-            padding: "0 50px",
             marginTop: 64,
-            paddingTop: 30,
-            paddingBottom: 30,
+            padding: "20px",
+            borderRadius: "20px",
+            backgroundColor: "#F5F8FA",
           }}
         >
           <Switch>
+            <Route path="/channels/:channelId" component={ChannelContent} />
             <Route path="/channels" component={Channels} />
           </Switch>
         </Content>

@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import "./PostDetail.css";
-import { Avatar, Image, Comment, Form, Input, Button } from "antd";
+import "./PostComments.scss";
+import { Avatar, Comment, Form, Input, Button } from "antd";
 import { useParams } from "react-router-dom";
-import { getPostById } from "../services/Posts";
 import { createComment, getComments } from "../services/Comments";
 import CommentList from "../CommentList/CommentList";
 import { getCurrentUser } from "../services/Users";
 const { TextArea } = Input;
 
-function PostDetail() {
-  let { channelId, postId } = useParams();
-  const [post, setPost] = useState(null);
+function PostComments({ postId }) {
+  let { channelId } = useParams();
   const [comments, setComments] = useState([]);
   const [currentComment, setCurrentComment] = useState("");
   const [currentUser, setCurrentUser] = useState(null);
@@ -51,19 +49,12 @@ function PostDetail() {
     });
   };
 
-  const fetchPostDetails = (channelId, postId) => {
-    getPostById(channelId, postId).then((item) => {
-      setPost(item.data);
-    });
-  };
-
   const saveComment = () => {
     createComment(channelId, postId, {
       userId: currentUser.id,
       comment: currentComment,
     })
       .then((res) => {
-        console.log(res);
         setComments([
           {
             author: currentUser.name,
@@ -95,18 +86,6 @@ function PostDetail() {
     let mounted = true;
 
     if (mounted) {
-      fetchPostDetails(channelId, postId);
-    }
-
-    return () => {
-      mounted = false;
-    };
-  }, [channelId, postId]);
-
-  useEffect(() => {
-    let mounted = true;
-
-    if (mounted) {
       fetchComments(channelId, postId);
     }
 
@@ -130,7 +109,12 @@ function PostDetail() {
   const Editor = ({ onChange, onSubmit, value }) => (
     <>
       <Form.Item>
-        <TextArea rows={2} onChange={onChange} value={value} className="CommentTextArea" />
+        <TextArea
+          rows={1}
+          onChange={onChange}
+          value={value}
+          className="CommentTextArea"
+        />
       </Form.Item>
       <Form.Item>
         <Button
@@ -146,47 +130,25 @@ function PostDetail() {
   );
 
   return (
-    <div>
-      {post ? (
-        <div className="PostDetail">
-          <h1>{post.title}</h1>
-          <h4>Posted By</h4>
-          <div className="Author">
+    <div className="PostComments">
+      {comments.length > 0 && <CommentList comments={comments} />}
+      {currentUser && (
+        <Comment
+          avatar={
             <Avatar
-              className="Avatar"
-              src={
-                <Image
-                  src={`data:image/png;base64, ${post.user.image}`}
-                  alt={post.user.name}
-                />
-              }
+              src={`data:image/png;base64, ${currentUser.image}`}
+              alt={currentUser.name}
             />
-            <hr className="Divider" />
-          </div>
-          <h4>{post.user.name}</h4>
-          <div className="PostContent">{post.content}</div>
-          {comments.length > 0 && <CommentList comments={comments} />}
-          {currentUser && (
-            <Comment
-              avatar={
-                <Avatar
-                  src={`data:image/png;base64, ${currentUser.image}`}
-                  alt={currentUser.name}
-                />
-              }
-              content={Editor({
-                onChange: handleChange,
-                onSubmit: handleSubmit,
-                value: currentComment,
-              })}
-            />
-          )}
-        </div>
-      ) : (
-        ""
+          }
+          content={Editor({
+            onChange: handleChange,
+            onSubmit: handleSubmit,
+            value: currentComment,
+          })}
+        />
       )}
     </div>
   );
 }
 
-export default PostDetail;
+export default PostComments;

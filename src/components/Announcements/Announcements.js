@@ -1,9 +1,11 @@
 import React from "react";
+import Title from "antd/lib/typography/Title";
+import "./Announcements.scss";
 
 function Announcements() {
   return (
-    <div>
-      <h2>Announcements</h2>
+    <div className="Announcements">
+      <Title level={4}>Announcements</Title>
     </div>
   );
 }

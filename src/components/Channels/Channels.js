@@ -3,24 +3,26 @@ import Avatar from "antd/lib/avatar/avatar";
 import Paragraph from "antd/lib/typography/Paragraph";
 import Title from "antd/lib/typography/Title";
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { getAllChannels } from "../services/Channels";
 import "./Channels.scss";
 
-function grabColor() {
-  let tagColors = [
-    "red",
-    "green",
-    "blue",
-    "magenta",
-    "orange",
-    "cyan",
-    "geekblue",
-  ];
-  let random = Math.floor(Math.random() * tagColors.length);
-  return tagColors[random];
-}
+// function grabColor() {
+//   let tagColors = [
+//     "red",
+//     "green",
+//     "blue",
+//     "magenta",
+//     "orange",
+//     "cyan",
+//     "geekblue",
+//   ];
+//   let random = Math.floor(Math.random() * tagColors.length);
+//   return tagColors[random];
+// }
 
 function Channels() {
+  const history = useHistory();
   const [channelList, setChannelList] = useState([]);
 
   useEffect(() => {
@@ -37,12 +39,21 @@ function Channels() {
 
   return (
     <div className="Channels">
-      <Row justify="space-around" align="middle" gutter={[16, 24]}>
+      <Title level={4}>Featured Channels</Title>
+      <Row justify="flex-start" align="middle" gutter={[24, 24]}>
         {channelList.map((channel) => {
           return (
-            <Col xs={24} sm={24} md={12} lg={8} xl={4}>
-              <div className="ChannelsCard">
-                <Avatar size={64} />
+            <Col xs={24} md={12} lg={8} xl={6} key={channel.id}>
+              <div
+                className="ChannelsCard"
+                onClick={() => {
+                  history.push(`/channels/${channel.id}`);
+                }}
+              >
+                <Avatar
+                  size={64}
+                  src={`data:image/png;base64, ${channel.image}`}
+                />
                 <div>
                   <Title level={5} className="ChannelsCardTitle">
                     {channel.title}

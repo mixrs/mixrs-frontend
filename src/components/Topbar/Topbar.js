@@ -13,7 +13,7 @@ function Topbar() {
         zIndex: 1,
         width: "100%",
         backgroundColor: "white",
-        color: "black",
+        color: "black"
       }}
     >
       <Menu theme="light" mode="horizontal" defaultSelectedKeys={["1"]}>
