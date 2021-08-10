@@ -53,7 +53,7 @@ function ChannelContent() {
                   }}
                 />
               </Col>
-              <Col xs={24} md={14} lg={18}>
+              <Col xs={24} md={18} lg={20}>
                 <Row>
                   <Col xs={24}>
                     <Title level={4}>{channelDetails.title}</Title>
@@ -61,12 +61,16 @@ function ChannelContent() {
                   <Col xs={24}>
                     <Paragraph>{channelDetails.description}</Paragraph>
                   </Col>
+                  <Col xs={24}>
+                    <Button
+                      type="primary"
+                      icon={<CheckOutlined />}
+                      shape="round"
+                    >
+                      Join
+                    </Button>
+                  </Col>
                 </Row>
-              </Col>
-              <Col xs={24} md={4} lg={2}>
-                <Button type="primary" icon={<CheckOutlined />} shape="round">
-                  Join
-                </Button>
               </Col>
             </Row>
             <Divider style={{ margin: "12px" }} />
