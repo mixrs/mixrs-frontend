@@ -64,7 +64,7 @@ function ChannelContent() {
                 </Row>
               </Col>
               <Col xs={24} md={4} lg={2}>
-                <Button type="primary" icon={<CheckOutlined />}>
+                <Button type="primary" icon={<CheckOutlined />} shape="round">
                   Join
                 </Button>
               </Col>

@@ -28,7 +28,7 @@ function App() {
           </Switch>
         </Content>
         <Footer style={{ textAlign: "center", backgroundColor: "white" }}>
-          Ant Design ©2018 Created by Ant UED
+          Mixrs ©2021
         </Footer>
       </Layout>
     </div>

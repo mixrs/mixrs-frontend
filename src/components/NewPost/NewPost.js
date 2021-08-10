@@ -1,6 +1,6 @@
 import React from "react";
-import "./NewPost.css";
-import { Drawer, Form, Button, Col, Row, Input } from "antd";
+import "./NewPost.scss";
+import { Drawer, Form, Button, Col, Row, Input, message } from "antd";
 import { createPost } from "../services/Posts";
 import { useParams } from "react-router-dom";
 import { getUserById } from "../services/Users";
@@ -12,27 +12,35 @@ function NewPost({ onClose, visible, posts, setPosts }) {
   const onFinish = () => {
     form.validateFields().then((values) => {
       onClose();
-      createPost(values, channelId).then((res) => {
-        let data = res.data;
-        let userId = data.user.id;
-        getUserById(userId).then((res) => {
-          setPosts([
-            ...posts,
-            {
-              id: data.id,
-              title: data.title,
-              content: data.content,
-              createdAt: data.createdAt,
-              updatedAt: data.updatedAt,
-              user: {
-                id: res.data.id,
-                name: res.data.name,
-                image: res.data.image,
-              },
-            },
-          ]);
+      createPost(values, channelId)
+        .then((res) => {
+          let data = res.data;
+          let userId = data.user.id;
+          getUserById(userId)
+            .then((res) => {
+              setPosts([
+                {
+                  id: data.id,
+                  title: data.title,
+                  content: data.content,
+                  createdAt: data.createdAt,
+                  updatedAt: data.updatedAt,
+                  user: {
+                    id: res.data.id,
+                    name: res.data.name,
+                    image: res.data.image,
+                  },
+                },
+                ...posts,
+              ]);
+            })
+            .catch((err) => console.error(err));
+        })
+        .then(() => message.success("Added New Post", 3))
+        .catch((err) => {
+          console.error(err);
+          message.error("Error Creating New Post", 3);
         });
-      });
       form.resetFields();
     });
   };
@@ -69,7 +77,7 @@ function NewPost({ onClose, visible, posts, setPosts }) {
               label="Title"
               rules={[{ required: true, message: "Please enter post title" }]}
             >
-              <Input placeholder="Please enter post title" />
+              <Input placeholder="Please enter post title" allowClear />
             </Form.Item>
           </Col>
         </Row>
@@ -88,6 +96,8 @@ function NewPost({ onClose, visible, posts, setPosts }) {
               <Input.TextArea
                 rows={4}
                 placeholder="Please enter post content"
+                allowClear
+                autoSize={{ minRows: 3, maxRows: 6 }}
               />
             </Form.Item>
           </Col>

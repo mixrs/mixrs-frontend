@@ -5,7 +5,7 @@ export function getCurrentUser() {
 }
 
 export function getUserById(userId) {
-  return fetch(`http://localhost:8080/api/v1/users/${userId}`).then((data) =>
-    data.json()
-  );
+  return fetch(`http://localhost:8080/api/v1/users/${userId}`)
+    .then((data) => data.json())
+    .catch((err) => err);
 }

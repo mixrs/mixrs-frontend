@@ -1,28 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getAllPosts } from "../services/Posts";
-import "./PostList.css";
+import "./PostList.scss";
 import Title from "antd/lib/typography/Title";
 import Post from "../Post/Post";
-
-// function grabColor() {
-//   let tagColors = [
-//     "red",
-//     "green",
-//     "blue",
-//     "magenta",
-//     "orange",
-//     "cyan",
-//     "geekblue",
-//   ];
-//   let random = Math.floor(Math.random() * tagColors.length);
-//   return tagColors[random];
-// }
+import { Button } from "antd";
+import NewPost from "../NewPost/NewPost";
 
 function PostList() {
   let { channelId } = useParams();
 
   const [posts, setPosts] = useState([]);
+  const [showNewPostForm, setShowNewPostForm] = useState(false);
+
+  const showForm = () => {
+    setShowNewPostForm(true);
+  };
+
+  const closeForm = () => {
+    setShowNewPostForm(false);
+  };
 
   useEffect(() => {
     let mounted = true;
@@ -38,7 +35,18 @@ function PostList() {
 
   return (
     <div className="PostList">
-      <Title level={4}>{`Posts (${posts.length})`}</Title>
+      <div className="PostListHeader">
+        <Title level={4}>{`Posts (${posts.length})`}</Title>
+        <Button type="primary" onClick={() => showForm()} shape="round">
+          New Post
+        </Button>
+      </div>
+      <NewPost
+        onClose={closeForm}
+        visible={showNewPostForm}
+        posts={posts}
+        setPosts={setPosts}
+      />
       {posts.map((post) => {
         return <Post data={post} key={post.id} />;
       })}

@@ -1,0 +1,9 @@
+.PostList {
+  margin-top: 20px;
+
+  .PostListHeader {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+}

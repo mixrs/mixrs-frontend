@@ -114,6 +114,8 @@ function PostComments({ postId }) {
           onChange={onChange}
           value={value}
           className="CommentTextArea"
+          autoSize={{ minRows: 1, maxRows: 3 }}
+          allowClear
         />
       </Form.Item>
       <Form.Item>
@@ -122,8 +124,9 @@ function PostComments({ postId }) {
           onClick={onSubmit}
           type="primary"
           shape="round"
+          size="small"
         >
-          Add Comment
+          Comment
         </Button>
       </Form.Item>
     </>

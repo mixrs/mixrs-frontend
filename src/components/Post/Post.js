@@ -4,6 +4,7 @@ import moment from "moment";
 import { Avatar, Image } from "antd";
 import Title from "antd/lib/typography/Title";
 import PostComments from "../PostComments/PostComments";
+import Paragraph from "antd/lib/typography/Paragraph";
 
 function Post({ data }) {
   return (
@@ -17,7 +18,7 @@ function Post({ data }) {
         </span>
       </div>
       <Title level={4}>{data.title}</Title>
-      <p className="PostContent">{data.content}</p>
+      <Paragraph className="PostContent">{data.content}</Paragraph>
       <PostComments postId={data.id} />
     </div>
   );
