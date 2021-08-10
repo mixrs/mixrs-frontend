@@ -1,7 +1,9 @@
 export function getComments(channelId, postId) {
   return fetch(
     `http://localhost:8080/api/v1/channels/${channelId}/posts/${postId}/comments`
-  ).then((data) => data.json());
+  )
+    .then((data) => data.json())
+    .catch((err) => err);
 }
 
 export function createComment(channelId, postId, comment) {
@@ -14,5 +16,7 @@ export function createComment(channelId, postId, comment) {
       },
       body: JSON.stringify(comment),
     }
-  ).then((data) => data.json());
+  )
+    .then((data) => data.json())
+    .catch((err) => err);
 }

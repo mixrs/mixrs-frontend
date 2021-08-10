@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import "./PostComments.scss";
-import { Avatar, Comment, Form, Input, Button } from "antd";
+import { Avatar, Comment, Form, Input, Button, message } from "antd";
 import { useParams } from "react-router-dom";
 import { createComment, getComments } from "../services/Comments";
 import CommentList from "../CommentList/CommentList";
@@ -67,7 +67,9 @@ function PostComments({ postId }) {
           ...comments,
         ]);
       })
-      .then(() => setCurrentComment(""));
+      .then(() => setCurrentComment(""))
+      .then(() => message.success("Added New Comment", 2))
+      .catch((err) => message.error("Error Adding New Comment", 2));
   };
 
   useEffect(() => {

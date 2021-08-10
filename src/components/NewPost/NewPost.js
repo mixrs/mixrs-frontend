@@ -36,10 +36,10 @@ function NewPost({ onClose, visible, posts, setPosts }) {
             })
             .catch((err) => console.error(err));
         })
-        .then(() => message.success("Added New Post", 3))
+        .then(() => message.success("Added New Post", 2))
         .catch((err) => {
           console.error(err);
-          message.error("Error Creating New Post", 3);
+          message.error("Error Creating New Post", 2);
         });
       form.resetFields();
     });
