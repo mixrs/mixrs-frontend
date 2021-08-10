@@ -69,7 +69,10 @@ function PostComments({ postId }) {
       })
       .then(() => setCurrentComment(""))
       .then(() => message.success("Added New Comment", 2))
-      .catch((err) => message.error("Error Adding New Comment", 2));
+      .catch((err) => {
+        console.error(err);
+        message.error("Error Adding New Comment", 2);
+      });
   };
 
   useEffect(() => {

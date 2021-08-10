@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getAllPosts } from "../services/Posts";
+import { deletePost, getAllPosts } from "../services/Posts";
 import "./PostList.scss";
 import Title from "antd/lib/typography/Title";
 import Post from "../Post/Post";
-import { Button } from "antd";
+import { Button, message } from "antd";
 import NewPost from "../NewPost/NewPost";
 
 function PostList() {
@@ -12,6 +12,7 @@ function PostList() {
 
   const [posts, setPosts] = useState([]);
   const [showNewPostForm, setShowNewPostForm] = useState(false);
+  const [, setShowDeleteConfirm] = useState(false);
 
   const showForm = () => {
     setShowNewPostForm(true);
@@ -33,6 +34,19 @@ function PostList() {
     return () => (mounted = false);
   }, [channelId]);
 
+  const handleDeletePost = (channelId, postId) => {
+    deletePost(channelId, postId)
+      .then(() => {
+        setPosts(posts.filter((post) => post.id !== postId));
+        setShowDeleteConfirm(false);
+        // message.success("Deleted Post");
+      })
+      .catch((err) => {
+        console.error(err);
+        message.error("Error Deleting Post");
+      });
+  };
+
   return (
     <div className="PostList">
       <div className="PostListHeader">
@@ -48,7 +62,14 @@ function PostList() {
         setPosts={setPosts}
       />
       {posts.map((post) => {
-        return <Post data={post} key={post.id} />;
+        return (
+          <Post
+            data={post}
+            key={post.id}
+            deletePost={handleDeletePost}
+            setShowDeleteConfirm={setShowDeleteConfirm}
+          />
+        );
       })}
     </div>
   );

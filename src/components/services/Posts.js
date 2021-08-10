@@ -19,3 +19,14 @@ export function createPost(postDetails, channelId) {
     .then((data) => data.json())
     .catch((err) => err);
 }
+
+export function deletePost(channelId, postId) {
+  return fetch(
+    `http://localhost:8080/api/v1/channels/${channelId}/posts/${postId}`,
+    {
+      method: "DELETE",
+    }
+  )
+    .then((data) => data.json())
+    .catch((err) => err);
+}
